@@ -1,0 +1,128 @@
+@import url("https://fonts.googleapis.com/css2?family=Lora:wght@700&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Lora", serif;
+}
+:root {
+  --grid-size: 80vmin;
+  --grid-color: #283747;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 2rem;
+  min-height: 100vh;
+  background: #faf4eb;
+}
+
+h1 {
+  text-align: center;
+}
+
+.overlay {
+  padding: 0.25rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100vw;
+  min-height: 100%;
+  opacity: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition-delay: 0.5s;
+  transition-duration: 1s;
+  z-index: -1;
+  gap: 0.5rem;
+  color: #ecf0f1;
+  background-color: #5dade2ad;
+  font-size: calc(var(--grid-size) / 8);
+  text-shadow: 4px 3px 0px rgb(41, 41, 41), 9px 8px 0px rgba(0, 0, 0, 0.15);
+  transition-property: opacity, z-index;
+}
+
+.btn {
+  font-size: calc(var(--grid-size) / 16);
+  border-radius: 0.2rem;
+  padding: 0.4rem 0.6rem;
+  font-weight: bold;
+  background-color: rgba(116, 116, 116, 0.452);
+  color: whitesmoke;
+  cursor: pointer;
+  border: none;
+}
+
+.btn:hover {
+  background-color: rgba(26, 26, 26, 0.452);
+}
+
+#intro {
+  background-color: #5dade2ad;
+}
+
+#win {
+  background-color: #1ebc608c;
+}
+
+#tie {
+  background-color: #ee6f1a8c;
+}
+
+.visible {
+  opacity: 1;
+  z-index: 2;
+  transition-delay: 1s;
+}
+
+#container {
+  height: var(--grid-size);
+  width: var(--grid-size);
+  margin: auto 0;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.box {
+  width: calc(var(--grid-size) / 3);
+  height: calc(var(--grid-size) / 3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bolder;
+  font-size: calc(var(--grid-size) / 4);
+  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9,
+    0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
+    0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2),
+    0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
+    0 20px 20px rgba(0, 0, 0, 0.15);
+  transition-duration: 0.4s;
+  transition-property: color;
+}
+
+.bR {
+  border-right: 2px solid var(--grid-color);
+}
+.bL {
+  border-left: 2px solid var(--grid-color);
+}
+.bD {
+  border-bottom: 2px solid var(--grid-color);
+}
+.bU {
+  border-top: 2px solid var(--grid-color);
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}

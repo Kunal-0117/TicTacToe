@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <title>XO GAME</title>
+</head>
+
+<body class="noselect">
+
+  <div id="intro" class="overlay visible">
+    <h1>Welcome to <br> Tic Tac Toe</h1>
+
+    <div>
+      <button class="btn" id="pvpPlay">PvP</button>
+      <button class="btn" id="cpuPlay">P vs CPU</button>
+    </div>
+
+  </div>
+
+  <div id="difficulty" class="overlay">
+    <div>
+      <button class="btn" id="easyMode">Easy</button>
+      <button class="btn" id="mediumMode">Medium</button>
+    </div>
+    <div>
+      <button class="btn" id="hardMode">Hard</button>
+      <button class="btn" id="impossibleMode">Impossible</button>
+    </div>
+    <button class="home btn">Home</button>
+  </div>
+
+  <div id="win" class="overlay">
+    <h1></h1>
+    <div>
+      <button class="home btn">Home</button>
+      <button class="replay btn">Replay?</button>
+    </div>
+  </div>
+
+
+  <div id="tie" class="overlay">
+    <h1>It's a tie!</h1>
+    <div>
+      <button class="home btn">Home</button>
+      <button class="replay btn">Replay?</button>
+    </div>
+  </div>
+
+  <div id="container">
+    <div class="box bR bD" data-r="0" data-c="0" id="0"></div>
+    <div class="box bR bD bL" data-r="0" data-c="1" id="1"></div>
+    <div class="box bL bD" data-r="0" data-c="2" id="2"></div>
+
+    <div class="box bU bR bD" data-r="1" data-c="0" id="3"></div>
+    <div class="box bU bR bD bL" data-r="1" data-c="1" id="4"></div>
+    <div class="box bL bD bU" data-r="1" data-c="2" id="5"></div>
+
+    <div class="box bU bR" data-r="2" data-c="0" id="6"></div>
+    <div class="box bU bL bR" data-r="2" data-c="1" id="7"></div>
+    <div class="box bU bL" data-r="2" data-c="2" id="8"></div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
