@@ -10,6 +10,13 @@
   --grid-color: #283747;
 }
 
+html,
+body {
+  overscroll-behavior-y: none;
+  position: relative;
+  overflow: hidden;
+}
+
 body {
   display: flex;
   align-items: center;
