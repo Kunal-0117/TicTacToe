@@ -1,14 +1,58 @@
 @import url("https://fonts.googleapis.com/css2?family=Lora:wght@700&display=swap");
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   font-family: "Lora", serif;
 }
+
 :root {
+
+  --main-bg: #faf4eb;
+
   --grid-size: 80vmin;
   --grid-color: #283747;
+  --grid-first-player-font: #B03A2E;
+  --grid-second-player-font: #2874A6;
+  --grid-tie-font: #424949;
+  --grid-won-font: #17A589;
+  --grid-lost-font: #E5E8E8;
+
+  --overlay-default-bg: #5dade2ad;
+  --overlay-win-bg: #1ebc608c;
+  --overlay-tie-bg: #ee6f1a8c;
+  --overlay-font: #ecf0f1;
+  --overlay-btn-bg: rgba(116, 116, 116, 0.452);
+  --overlay-btn-font: var(--overlay-font);
+  --overlay-default-font: var(--overlay-font);
+  --overlay-won-font: var(--overlay-font);
+  --overlay-tie-font: var(--overlay-font);
 }
+
+:root.dark {
+
+  --main-bg: #242929;
+
+  --grid-color: #454C52;
+  --grid-first-player-font: #FF5630;
+  --grid-second-player-font: #00B8D9;
+  --grid-tie-font: #424949;
+  --grid-won-font: #17A589;
+  --grid-lost-font: #E5E8E8;
+
+  --overlay-default-bg: #181818e4;
+  --overlay-win-bg: var(--overlay-default-bg);
+  --overlay-tie-bg: var(--overlay-default-bg);
+  --overlay-font: #ecf0f1;
+  --overlay-btn-bg: #263238;
+  --overlay-btn-font: #F5F5F5;
+  --overlay-default-font: #4FC3F7;
+  --overlay-won-font: #00C853;
+  --overlay-tie-font: #E64A19;
+}
+
+
 
 html,
 body {
@@ -23,7 +67,7 @@ body {
   flex-direction: column;
   gap: 2rem;
   min-height: 100vh;
-  background: #faf4eb;
+  background: var(--main-bg);
 }
 
 h1 {
@@ -46,8 +90,8 @@ h1 {
   transition-duration: 1s;
   z-index: -1;
   gap: 0.5rem;
-  color: #ecf0f1;
-  background-color: #5dade2ad;
+  color:  var(--overlay-default-font);
+  background-color: var(--overlay-default-bg);
   font-size: calc(var(--grid-size) / 8);
   text-shadow: 4px 3px 0px rgb(41, 41, 41), 9px 8px 0px rgba(0, 0, 0, 0.15);
   transition-property: opacity, z-index;
@@ -58,26 +102,30 @@ h1 {
   border-radius: 0.2rem;
   padding: 0.4rem 0.6rem;
   font-weight: bold;
-  background-color: rgba(116, 116, 116, 0.452);
-  color: whitesmoke;
+  background-color: var(--overlay-btn-bg);
+  color: var(--overlay-btn-font);
   cursor: pointer;
   border: none;
 }
 
 .btn:hover {
-  background-color: rgba(26, 26, 26, 0.452);
+  filter: brightness(80%);
 }
 
 #intro {
-  background-color: #5dade2ad;
+  background-color: var(--overlay-default-bg);
+  color:  var(--overlay-default-font);
 }
 
 #win {
-  background-color: #1ebc608c;
+  background-color: var(--overlay-win-bg);
+  color: var(--overlay-won-font);
 }
 
 #tie {
-  background-color: #ee6f1a8c;
+  background-color: var(--overlay-tie-bg);
+  color: var(--overlay-tie-font);
+
 }
 
 .visible {
@@ -102,11 +150,6 @@ h1 {
   justify-content: center;
   font-weight: bolder;
   font-size: calc(var(--grid-size) / 4);
-  text-shadow: 0 1px 0 #ccc, 0 2px 0 #c9c9c9, 0 3px 0 #bbb, 0 4px 0 #b9b9b9,
-    0 5px 0 #aaa, 0 6px 1px rgba(0, 0, 0, 0.1), 0 0 5px rgba(0, 0, 0, 0.1),
-    0 1px 3px rgba(0, 0, 0, 0.3), 0 3px 5px rgba(0, 0, 0, 0.2),
-    0 5px 10px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.2),
-    0 20px 20px rgba(0, 0, 0, 0.15);
   transition-duration: 0.4s;
   transition-property: color;
 }
@@ -114,22 +157,81 @@ h1 {
 .bR {
   border-right: 2px solid var(--grid-color);
 }
+
 .bL {
   border-left: 2px solid var(--grid-color);
 }
+
 .bD {
   border-bottom: 2px solid var(--grid-color);
 }
+
 .bU {
   border-top: 2px solid var(--grid-color);
 }
 
+#theme-wrapper {
+  position: absolute;
+  top: 2vmax;
+  left: 3vmax;
+  z-index: 5;
+  background-color: inherit;
+  border-radius: 50%;
+  padding: 1rem;
+  background-color: #283747;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bxs-sun {
+  color: #FFCF4B;
+}
+
+.bxs-moon {
+  color: #ECF0F1;
+}
+
+#theme-wrapper>* {
+  position: absolute;
+  transition: .3s;
+}
+
+#theme-wrapper>input[type="checkbox"] {
+  transform: scale(2);
+  position: absolute;
+  opacity: 0;
+  z-index: 6;
+}
+
+#theme-wrapper>input[type="checkbox"]~.bxs-sun {
+  opacity: 0;
+}
+
+#theme-wrapper>input[type="checkbox"]:checked~.bxs-moon {
+  opacity: 0;
+}
+
+#theme-wrapper>input[type="checkbox"]:checked~.bxs-sun {
+  opacity: 1;
+}
+
+
+
+
+
 .noselect {
-  -webkit-touch-callout: none; /* iOS Safari */
-  -webkit-user-select: none; /* Safari */
-  -khtml-user-select: none; /* Konqueror HTML */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
+  -webkit-touch-callout: none;
+  /* iOS Safari */
+  -webkit-user-select: none;
+  /* Safari */
+  -khtml-user-select: none;
+  /* Konqueror HTML */
+  -moz-user-select: none;
+  /* Firefox */
+  -ms-user-select: none;
+  /* Internet Explorer/Edge */
+  user-select: none;
+  /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
 }
