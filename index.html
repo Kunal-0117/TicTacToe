@@ -6,10 +6,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="style.css" />
+  <link href='https://unpkg.com/boxicons@2.1.2/css/boxicons.min.css' rel='stylesheet'>
   <title>XO GAME</title>
 </head>
 
 <body class="noselect">
+
+  <div id="theme-wrapper">
+    <input type="checkbox" id="themeBtn">
+    <i class='bx bxs-sun'></i>
+    <i class='bx bxs-moon'></i>
+  </div>
 
   <div id="intro" class="overlay visible">
     <h1>Welcome to <br> Tic Tac Toe</h1>
@@ -64,7 +71,9 @@
     <div class="box bU bL" data-r="2" data-c="2" id="8"></div>
   </div>
 
-  <script src="script.js"></script>
+
+
 </body>
+<script src="script.js"></script>
 
 </html>
