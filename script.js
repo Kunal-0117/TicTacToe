@@ -10,33 +10,35 @@ let hard = false;
 let medium = false;
 
 function color(i, type) {
-  //coloring text black
+  //coloring text semi-white
   for (let box of boxes) {
-    box.style.color = "#E5E8E8";
+    box.style.color = "var(--grid-lost-font)";
   }
+  let wonColor = "var(--grid-won-font)";
 
   //coloring green color to the winning one.
   if (type == "r") {
     for (let box of document.querySelectorAll(`.box[data-r='${i}']`)) {
-      box.style.color = "#17A589";
+      box.style.color = wonColor;
     }
   } else if (type == "c") {
     for (let box of document.querySelectorAll(`.box[data-c='${i}']`)) {
-      box.style.color = "#17A589";
+      box.style.color = wonColor;
     }
   } else if (type == "d" && i == 0) {
     for (let j = 0; j < 3; j++) {
       document.querySelector(`.box[data-r='${j}'][data-c='${j}']`).style.color =
-        "#17A589";
+        wonColor;
     }
   } else {
     for (let j = 0; j < 3; j++) {
       document.querySelector(
         `.box[data-r='${j}'][data-c='${2 - j}']`
-      ).style.color = "#17A589";
+      ).style.color = wonColor;
     }
   }
 }
+
 function winTextColor() {
   // Checking all rows
   if (board[0] == board[1] && board[1] == board[2]) color(0, "r");
@@ -53,10 +55,12 @@ function winTextColor() {
 
 function trigger(caller) {
   let text = flag ? "X" : "O";
-  caller.style.color = flag ? "#B03A2E" : "#2874A6";
+  caller.style.color = flag
+    ? "var(--grid-first-player-font)"
+    : "var(--grid-second-player-font)";
   caller.textContent = text;
   board[caller.id] = text;
-  flag = flag ? false : true;
+  flag = !flag;
 
   if (trigger.count === undefined) {
     trigger.count = 0;
@@ -79,7 +83,7 @@ function trigger(caller) {
   //change color of text to black when there is a tie;
   if (trigger.count == 9) {
     for (let box of boxes) {
-      box.style.color = "#424949";
+      box.style.color = "var(--grid-tie-font)";
     }
     document.getElementById("tie").classList.add("visible");
     return;
@@ -189,7 +193,7 @@ function minimax(reboard, player) {
   let array = avail(reboard);
   let result = winning(reboard);
   if (result) {
-    if (result == 'X') {
+    if (result == "X") {
       return {
         score: -10,
       };
@@ -295,7 +299,6 @@ Array.from(homes).forEach(function (home) {
   });
 });
 
-
 const pvpPlay = document.getElementById("pvpPlay");
 pvpPlay.addEventListener("click", function () {
   pvp = true;
@@ -331,3 +334,11 @@ document
     impossible = true;
     document.getElementById("difficulty").classList.remove("visible");
   });
+
+// Theme Button
+let themeBtn = document.getElementById("themeBtn");
+themeBtn.addEventListener("change", changeTheme);
+function changeTheme() {
+  let mode = this.checked ? "add" : "remove";
+  document.querySelector(":root").classList[mode]("dark");
+}
