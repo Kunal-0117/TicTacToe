@@ -338,7 +338,13 @@ document
 // Theme Button
 let themeBtn = document.getElementById("themeBtn");
 themeBtn.addEventListener("change", changeTheme);
+
 function changeTheme() {
   let mode = this.checked ? "add" : "remove";
   document.querySelector(":root").classList[mode]("dark");
+
+  // for header of mobile devices
+  let meta = document.querySelector('meta[name="theme-color"]');
+  let color = this.checked ? "#242929" : "#faf4eb";
+  meta.setAttribute("content", color);
 }
